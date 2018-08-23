@@ -1,1 +1,31 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<!--<ion-nav [root]="rootPage"></ion-nav> -->
+<ion-split-pane>
+    <ion-menu [content]="conteudo" *ngIf="UsuarioLogado">
+        <ion-content>
+                <ion-item id="cabecalho-menu" class="cabecalho-menu">
+                        <div>
+                            <ion-avatar item-start>
+                                <img [src]="avatar">
+                            </ion-avatar>
+                        </div>
+                        <h2>{{ UsuarioLogado.displayName }}</h2>
+                        <p>{{ UsuarioLogado.email }}</p>
+                    </ion-item>
+        
+            <ion-list>
+                <button ion-item menuClose *ngFor="let pagina of paginas"
+                (click)="irParaPagina(pagina.component)">
+                    <ion-icon [name]="pagina.icone" item-left></ion-icon>
+                    {{ pagina.titulo }}
+                </button>
+                <button ion-item menuClose [disabled]="UsuarioLogado.uid != 'l6jl4ij2xrdnC80Q7oSY1JCeQMG2' && UsuarioLogado.uid != 'UwZ4TO9vMJaaj69E4PYKHP4mAbG3' ? true : false"
+                (click)="criabolao()">
+                    <ion-icon name="add" item-left></ion-icon>
+                    Criar Bolão
+                </button>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    
+    <ion-nav [root]="rootPage" #conteudo swipeBackEnabled="false" main></ion-nav>
+    </ion-split-pane>

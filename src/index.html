@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
-  <title>Ionic App</title>
+  <title>Bolão Grávida</title>
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
 
-  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="assets/icon/icogravida.ico">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
+  <!-- Falta tratar quando um bolão ninguém da nenhum palpite -> verificar e quando for fechar retornar a mensagem que não houve nehum palpite
+  Falta verificar também para tratar quando criar não deixa uma data prevista antes do dia atual e nem dentro do intervalo dos 15 dias -> tratar retornando uma mensagem de aviso
+  criar uma lista de ranking ao finalizar  o bolão com os mais proximos do acerto -> pode ser na aba de informação mesmo
+  -->
 
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,23 +23,93 @@
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <script src="cordova.js"></script>
 
-  <!-- un-comment this code to enable service worker
+
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
         .then(() => console.log('service worker installed'))
         .catch(err => console.error('Error', err));
     }
-  </script>-->
+  </script>
 
   <link href="build/main.css" rel="stylesheet">
 
 </head>
+
 <body>
 
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-functions.js"></script>
 
+  <script>
+    var config = {
+      apiKey: "AIzaSyDaab2ETWq1XDiDyQkFZp-wk_T7BDGHUPw",
+      authDomain: "bolaogravida.firebaseapp.com",
+      databaseURL: "https://bolaogravida.firebaseio.com",
+      projectId: "bolaogravida",
+      storageBucket: "bolaogravida.appspot.com",
+      messagingSenderId: "860339454568"
+    };
+    firebase.initializeApp(config);
+    //var db = firebase.firestore();
+    //var database = firebase.database();
+    var auth = firebase.auth();
+    var db = firebase.firestore();
+    var firebase = firebase;
+    /*var messaging = firebase.messaging();
+    messaging.usePublicVapidKey("BCXoOuNVWB57xYpaqpF33qelig_6SpRT37ZZmrXZjc9eDQY7Y6xVkspkm5tAPPivryJ2zPnwSFSd-4JL3c-6ZwM");
+
+    // pedindo permissão ao usuario para notificação
+    messaging.requestPermission().then(function () {
+      console.log('Notification permission granted.');
+      // TODO(developer): Retrieve an Instance ID token for use with FCM.
+      // ...
+    }).catch(function (err) {
+      console.log('Unable to get permission to notify.', err);
+    });
+
+    //Recuperar o token de registro atual
+    // Get Instance ID token. Initially this makes a network call, once retrieved
+    // subsequent calls to getToken will return from cache.
+    messaging.getToken().then(function (currentToken) {
+      if (currentToken) {
+        sendTokenToServer(currentToken);
+        updateUIForPushEnabled(currentToken);
+      } else {
+        // Show permission request.
+        console.log('No Instance ID token available. Request permission to generate one.');
+        // Show permission UI.
+        updateUIForPushPermissionRequired();
+        setTokenSentToServer(false);
+      }
+    }).catch(function (err) {
+      console.log('An error occurred while retrieving token. ', err);
+      showToken('Error retrieving Instance ID token. ', err);
+      setTokenSentToServer(false);
+    });
+    //Monitorar a atualização de token
+    // Callback fired if Instance ID token is updated.
+    messaging.onTokenRefresh(function () {
+      messaging.getToken().then(function (refreshedToken) {
+        console.log('Token refreshed.');
+        // Indicate that the new Instance ID token has not yet been sent to the
+        // app server.
+        setTokenSentToServer(false);
+        // Send Instance ID token to app server.
+        sendTokenToServer(refreshedToken);
+        // ...
+      }).catch(function (err) {
+        console.log('Unable to retrieve refreshed token ', err);
+        showToken('Unable to retrieve refreshed token ', err);
+      });
+    });*/
+  </script>
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>
 
@@ -46,4 +121,5 @@
   <script src="build/main.js"></script>
 
 </body>
+
 </html>
