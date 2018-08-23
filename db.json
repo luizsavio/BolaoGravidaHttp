@@ -1,0 +1,18 @@
+{
+  "cursos": [
+    {
+      "name": "ASP.NET",
+      "id": 2
+    },
+    {
+      "name": "ANGULAR",
+      "id": 3
+    }
+  ],
+  "usuario": [
+    {
+      "id": 1,
+      "nome": "Savio"
+    }
+  ]
+}
