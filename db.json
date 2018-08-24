@@ -1,18 +1,11 @@
 {
-  "cursos": [
-    {
-      "name": "ASP.NET",
-      "id": 2
-    },
-    {
-      "name": "ANGULAR",
-      "id": 3
-    }
-  ],
-  "usuario": [
+  "usuarios": [
     {
       "id": 1,
-      "nome": "Savio"
+      "email": "luizsavio2009@hotmail.com",
+      "senha": "123456",
+      "nomeUsuario": "Luiz Savio S Moraes",
+      "photoUrl": "assets/img/avatar-padrao.jpg"
     }
   ]
 }

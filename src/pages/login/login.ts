@@ -3,6 +3,7 @@ import { IonicPage, NavController, /*NavParams,*/ LoadingController, AlertContro
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ListaBolaoPage } from '../lista-bolao/lista-bolao';
 import { Storage } from '@ionic/storage';
+import { UsuarioServiceProvider } from '../../providers/usuario-service/usuario-service';
 
 /**
  * Generated class for the LoginPage page.
@@ -32,8 +33,9 @@ export class LoginPage {
     public app: App,
     public navCtrl: NavController,
     public storage: Storage,
-    fb: FormBuilder
-  ) {
+    fb: FormBuilder,
+    private _usuarioProvider: UsuarioServiceProvider) {
+
     this.loginForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
@@ -65,7 +67,17 @@ export class LoginPage {
     if (!data.email) {
       return;
     }
-    
+    this.presentLoading();
+    this._usuarioProvider.efetuarLoginUsuario(data.email, data.password)
+    .subscribe((usuario) => {
+      console.log("usuario Logado:", usuario);
+      this.closingLoading();
+      this.navCtrl.setRoot(ListaBolaoPage.name);
+    },
+  (error) => {
+    this.closingLoading();
+    this.presentAlert(error);
+  }); 
   }
 
   ionViewDidEnter() {

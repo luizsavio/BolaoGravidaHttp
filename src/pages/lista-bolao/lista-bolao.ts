@@ -40,10 +40,7 @@ export class ListaBolaoPage {
   }
 
   ionViewDidLoad() {
-      this.presentLoading();
       this.carregarBoloes();
-      this.closingLoading();
-    
   }
 
   get UsuarioLogado() {

@@ -15,6 +15,7 @@ export class UsuarioServiceProvider {
   private _url: string;
   private _http: HttpClient;
   private authState;
+  private _usuarioLogado;
 
   constructor(private _api: ApiProvider) {
     this._http = this._api.http;
@@ -22,6 +23,11 @@ export class UsuarioServiceProvider {
   }
 
   efetuarLoginUsuario(email: string, senha: string): Observable<any>{
-    return;
+    return this._http.get(`${this._url}/usuarios`)
+    .do((usuario) => this._usuarioLogado = usuario);
+  }
+
+  get usuarioAtual(): any {
+    return (this._usuarioLogado !== null) ? this._usuarioLogado : null;
   }
 }

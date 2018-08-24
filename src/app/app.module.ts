@@ -12,15 +12,19 @@ import { BolaoInformacaoPage } from '../pages/bolao-informacao/bolao-informacao'
 import { BolaoParticipantesPage } from '../pages/bolao-participantes/bolao-participantes';
 import { UsuarioServiceProvider } from '../providers/usuario-service/usuario-service';
 import { ApiProvider } from '../providers/api/api';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/of';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
-    /*ListaBolaoPage,
-    CriarBolaoPage,
-    PerfilPage,
-    TabsbolaoPage,*/
     BolaoEditarPage,
     BolaoPalpitePage,
     BolaoInformacaoPage,
@@ -28,6 +32,7 @@ import { ApiProvider } from '../providers/api/api';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: 'Voltar',
       iconMode: 'ios',
@@ -37,8 +42,6 @@ import { ApiProvider } from '../providers/api/api';
       pageTransition: 'ios-transition',
       mode: 'ios'
     }),
-    //IonicModule.forRoot(MyApp),
-    //AngularFireModule.initializeApp(FIREBASE_CONFIG), 
     IonicStorageModule.forRoot({
       name: 'firebaseLocalStorageDb',
       storeName: 'firebaseLocalStorage',
